@@ -13,9 +13,13 @@ import proces.Observer;
  * @author H.M. van Dijk
  */
 public class Hart {
+    private final int MAX_DEFIBRILEER_POGINGEN = 3;
+    private final int MIN_DEFIBRILEER_HARTSLAG = 45;
+    private final int MAX_DEFIBRILEER_HARTSLAG = 90;
+    
     private ArrayList <Observer> observers = new ArrayList();
-    private int hartslag = 0;
-    private int defibrilleerAantal = 3;
+    private int hartslag;
+    private int defibrilleerAantal = MAX_DEFIBRILEER_POGINGEN ;
     
     public int getHartslag(){
         System.out.println("Hart->getHartslag()");
@@ -23,11 +27,13 @@ public class Hart {
     }
     
     public void defibrileer(){
-        System.out.println("Hart->defibrilleer()"); 
+        System.out.println("Hart->defibrilleer()");
         this.defibrilleerAantal--;
-        
+
         int hartslag = (int) (Math.random() * 100);      
-        if (hartslag > 45 && hartslag < 90 ){
+        if (hartslag > MIN_DEFIBRILEER_HARTSLAG
+                &&
+            hartslag < MAX_DEFIBRILEER_HARTSLAG){
             this.hartslag = hartslag;
         }
         informObservers();
