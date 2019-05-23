@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+  <head>
+    <title>Mandango - The Macho Movie Ticket Finder</title>
+
+    <script type="text/javascript">
+
+        var seats = [
+        [true, true, false, false, false, true, true, false, false],
+        [true, true, false, false, false, true, true, false, false]
+        ]
+        ;	  
+
+        var bezetImage = "bezet.png";
+        var vrijImage = "vrij.png";
+        var kiesImage = "kies.png";
+
+        function showSeats() {
+            var stoel = 0;
+            for (var rij = 0 ; rij < 2 ; rij++){
+                for (var plaats = 0 ; plaats < 9 ; plaats++){
+                    if(seats[rij][plaats]){
+                        // stoel is bezet = ROOD, bezet.png
+                        document.getElementById("seat"+stoel).src= bezetImage;					
+                    }
+                    else{
+                        // stoel is vrij = GROEN, vrij.png
+                        document.getElementById("seat"+stoel).src=vrijImage;				
+                    }
+                    stoel++;
+                }
+            }
+        }			
+
+        function selectSeat(seatNr) {
+            var rij = Math.floor(seatNr/9);
+            var plaats = seatNr % 9;
+            
+            if (seats[rij][plaats]){
+                alert ("Stoel " + seatNr + " is bezet");		
+            }
+            else{
+                document.getElementById("seat" + seatNr).src= kiesImage;
+                seats[rij][plaats] = true;
+            }
+        }
+    </script>
+  </head>
+
+  <body onload="showSeats();">
+    <div style="margin-top:75px; text-align:center">
+      <img id="seat0" alt="" src="" onclick="selectSeat(0)"/>
+      <img id="seat1" alt="" src="" onclick="selectSeat(1)"/>
+      <img id="seat2" src="" onclick="selectSeat(2)"/>
+      <img id="seat3" src="" onclick="selectSeat(3)"/>
+      <img id="seat4" src="" onclick="selectSeat(4)"/>
+      <img id="seat5" src="" onclick="selectSeat(5)"/>
+      <img id="seat6" src="" onclick="selectSeat(6)"/>
+      <img id="seat7" src="" onclick="selectSeat(7)"/>
+      <img id="seat8" src="" onclick="selectSeat(8)"/><br />
+      <img id="seat9" src="" onclick="selectSeat(9)"/>
+      <img id="seat10" src="" onclick="selectSeat(10)"/>
+      <img id="seat11" src="" onclick="selectSeat(11)"/>
+      <img id="seat12" src="" onclick="selectSeat(12)"/>
+      <img id="seat13" src="" onclick="selectSeat(13)"/>
+      <img id="seat14" src="" onclick="selectSeat(14)"/>
+      <img id="seat15" src="" onclick="selectSeat(15)"/>
+      <img id="seat16" src="" onclick="selectSeat(16)"/>	  
+      <img id="seat17" src="" onclick="selectSeat(17)"/>	 	  
+	  <br />
+    </div>
+  </body>
+</html>
