@@ -9,12 +9,15 @@ and open the template in the editor.
     <title>Mandango - The Macho Movie Ticket Finder</title>
 
     <script type="text/javascript">
+        var vrij = 0;
+        var bezet = 1;
+        var geselecteerd = 2;
 
         var seats = [
-        [true, true, false, false, false, true, true, false, false],
-        [true, true, false, false, false, true, true, false, false]
+        [bezet, bezet, vrij, vrij, vrij, bezet, bezet, vrij, vrij],
+        [bezet, bezet, vrij, vrij, vrij, bezet, bezet, vrij, vrij]
         ]
-        ;	  
+        ;
 
         var bezetImage = "bezet.png";
         var vrijImage = "vrij.png";
@@ -24,9 +27,9 @@ and open the template in the editor.
             var stoel = 0;
             for (var rij = 0 ; rij < 2 ; rij++){
                 for (var plaats = 0 ; plaats < 9 ; plaats++){
-                    if(seats[rij][plaats]){
+                    if(seats[rij][plaats] == bezet){
                         // stoel is bezet = ROOD, bezet.png
-                        document.getElementById("seat"+stoel).src= bezetImage;					
+                        document.getElementById("seat"+stoel).src= bezetImage;                 
                     }
                     else{
                         // stoel is vrij = GROEN, vrij.png
@@ -41,12 +44,24 @@ and open the template in the editor.
             var rij = Math.floor(seatNr/9);
             var plaats = seatNr % 9;
             
-            if (seats[rij][plaats]){
-                alert ("Stoel " + seatNr + " is bezet");		
-            }
-            else{
-                document.getElementById("seat" + seatNr).src= kiesImage;
-                seats[rij][plaats] = true;
+            switch (seats[rij][plaats]){
+                case bezet:
+                    // do niets
+                    break;
+                case vrij:
+                    document.getElementById("seat"+seatNr).src= kiesImage;
+                    seats[rij][plaats] = geselecteerd;
+                    break;
+                case geselecteerd:
+                    var action = confirm("Wilt U de stoel vrijgeven");
+                    if (action){
+                        document.getElementById("seat"+seatNr).src= vrijImage;
+                        seats[rij][plaats] = vrij;
+                    }
+                    else{
+                        document.getElementById("seat"+seatNr).src= kiesImage;
+                        seats[rij][plaats] = geselecteerd;                    
+                    }                          
             }
         }
     </script>
